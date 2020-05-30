@@ -1,0 +1,37 @@
+{% extends 'base.html'%}
+
+
+{% block content %}
+    <div class="feed">
+        <div class="feed_inner">
+            <a class="nickname" href="/feeds/new">new feed</a>
+            <div class="photo">
+                <img class="feed_image" src="/static/feedpage/img/article_img.jpg">
+            </div>
+        </div>
+    </div>
+
+    
+    {% for feed in feeds %}
+        <a href="/feeds/{{ feed.id }}">더보기</a>
+        <p>{{ feed.title }}</p>
+        <p>{{ feed.content }}</p>
+
+        <div class="feed">
+        <div class="feed_inner">
+            <p class="nickname">{{feed.title}}</p>
+            <div class="photo">
+                <img class="feed_image" src="/static/feedpage/img/article_img.jpg">
+            </div>
+            <div class="like">
+                <img class="icon" src="/static/feedpage/img/heart-regular.svg">
+            </div>
+            <div class="comment">
+                <input class="comment_box" type="text" placeholder="댓글 달기...">
+                <a class="comment_input" href="">게시</a>
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Liongram</title>
+        <link rel="stylesheet" href="{% static 'feedpage/style.css' %}"/>
+        <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap&subset=korean" rel="stylesheet">
+    </head>
+    <body>
+        <div class = "header">
+            <div class = "header_inner">
+                <div class = "logo">
+                    <a href = "https://www.instagram.com/">
+                        <img class="logo_img" src="/static/feedpage/img/logo_img.png">
+                    </a>
+                </div>
+                <div class = "search">
+                    <input class="search_box" type="text" placeholder="검색">
+                </div>
+                <div class = "button">
+                    <div class = "icon">
+                        <a href="https://www.instagram.com">
+                            <img src="/static/feedpage/img/bell-regular.svg">
+                        </a>
+                    </div>
+                    <div class="icon">
+                        <a href="https://www.instagram.com">
+                            <img src="/static/feedpage/img/heart-regular.svg">
+                        </a>
+                    </div>
+                    <div class="icon">
+                        <a href="https://www.instagram.com">
+                            <img src="/static/feedpage/img/user-solid.svg">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>
