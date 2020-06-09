@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <h1><strong>feed page</strong></h1>
+
+    <p><strong>new</strong></p>
+    <a href="/feeds/new">new feed</a>
+    <br>
+    <br>
+
+    <p><strong>feeds</strong></p>
+    {{feeds.title}}
+    {% for feed in feeds reversed %} 
+    {% comment %} feeds 는 views.py 에서 쏴준 것 {% endcomment %}
+        <div>
+            <p>title: {{feed.title}}</p>
+            <p>content: {{feed.content}}</p>
+            <a href="/feeds/{{feed.id}}">더보기</a>
+            <a href="/feeds/{{feed.id}}/edit">수정</a>
+            <a href="/feeds/{{feed.id}}/delete" onclick="return confirm('really?')">삭제</a>
+        </div>
+    {% endfor %}
+
+{% endblock content %}
+
