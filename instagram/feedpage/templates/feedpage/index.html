@@ -1,12 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <h1><strong>feed page</strong></h1>
-
-    <p><strong>new</strong></p>
-    <a href="/feeds/new">new feed</a>
-    <br>
-    <br>
+    {% if user.is_authenticated %}
+        <a href="/feeds/new">new feed</a>
+    {%endif%}
 
     <p><strong>feeds</strong></p>
     {{feeds.title}}
@@ -15,9 +12,35 @@
         <div>
             <p>title: {{feed.title}}</p>
             <p>content: {{feed.content}}</p>
+            
+            {% if  feed.photo %}
+                <img src="{{ feed.photo.url }}"  alt="" width="30%" height="20%">
+            {% endif %}
+
+            {% for c in feed.feedcomment_set.all %}
+
+                <p>{{ c.content }}</p>
+                {%if request.user == c.author or request.user == feed.author%}
+                    <form action="/feeds/{{ feed.id }}/comments/{{ c.id }}/" method="POST">
+                        {% csrf_token %}
+                        <button onclick="return confirm('really?')">댓글 삭제</button>
+                    </form>
+                {%endif%}
+
+            {% endfor %}
+            {%if user.is_authenticated%}
+                <form action="/feeds/{{ feed.id }}/comments/" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="content" />
+                    <button type="submit">댓글 달기</button>
+                </form>
+            {%endif%}
+            <a href="/feeds/{{feed.id}}/like">{{feed.like_users.count}} Likes</a>
             <a href="/feeds/{{feed.id}}">더보기</a>
             <a href="/feeds/{{feed.id}}/edit">수정</a>
-            <a href="/feeds/{{feed.id}}/delete" onclick="return confirm('really?')">삭제</a>
+            {%if request.user == feed.author%}
+                <a href="/feeds/{{feed.id}}/delete" onclick="return confirm('really?')">삭제</a>
+            {%endif%}
         </div>
     {% endfor %}
 

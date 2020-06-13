@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1>new feed</h1>
-    <form action="/feeds/" method="POST">
-    액션의 링크로 보내는데, 이때 포스트로 보낸다
+
+    <form enctype="multipart/form-data" action="/feeds/" method="POST">
+    {% comment %} 액션의 링크로 보내는데, 이때 포스트로 보낸다 {% endcomment %}
       {% csrf_token %}
-      <p>여기 인풋 이름대로 feeds 로 보낸다</p>
       <p>title</p> 
       <input name="title"> 
+      {% comment %}여기 인풋 이름대로 feeds 로 보낸다{% endcomment %}
       <p>content</p>
-      <input name="content">
-      <input type="submit" value="submit">
+      <input name="content">  
+      <p>photo</p>
+      <input name="photo" type="file">
+
+    <input type="submit" value="submit">
     </form>
 {% endblock content %}
